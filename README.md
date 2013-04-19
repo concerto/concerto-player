@@ -3,7 +3,7 @@
 
 ## Basic Build Instructions
 * apt-get install debootstrap squashfs-tools syslinux syslinux-common
-* <<maybe edit chroot_tasks.sh>>
+* ...maybe edit chroot_tasks.sh
 * sudo ./make_chroot.sh
 * sudo ./make_bootable_image.sh
 * qemu -m 1024 -snapshot -hda concerto.img # try out in qemu
