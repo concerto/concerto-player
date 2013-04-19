@@ -29,7 +29,7 @@ blackbox &
 unclutter &
 
 # run the browser (if it crashes or dies, the X session should end)
-chromium --no-first-run --kiosk http://signage.rpi.edu/?mac=aaa
+chromium --no-first-run --kiosk http://nightly.concerto-signage.org/frontend/1
 EOF
 
 # modify inittab so we auto-login at boot as concerto

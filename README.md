@@ -2,7 +2,7 @@ Concerto Player
 ===============
 tl;dr version - explained in more detail below...
 apt-get install debootstrap squashfs-tools syslinux syslinux-common # if you don't already have them
-# maybe edit chroot_tasks.sh
+...maybe edit chroot_tasks.sh
 sudo ./make_chroot.sh
 sudo ./make_bootable_image.sh
 qemu -m 1024 -snapshot -hda concerto.img # try out in qemu
