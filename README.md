@@ -1,12 +1,13 @@
-Concerto Player
+#Concerto Player
 ===============
-tl;dr version - explained in more detail below...
-apt-get install debootstrap squashfs-tools syslinux syslinux-common # if you don't already have them
-...maybe edit chroot_tasks.sh
-sudo ./make_chroot.sh
-sudo ./make_bootable_image.sh
-qemu -m 1024 -snapshot -hda concerto.img # try out in qemu
-dd if=concerto.img of=/dev/sdX # copy image to flash drive
+
+## Basic Build Instructions
+* apt-get install debootstrap squashfs-tools syslinux syslinux-common
+* <<maybe edit chroot_tasks.sh>>
+* sudo ./make_chroot.sh
+* sudo ./make_bootable_image.sh
+* qemu -m 1024 -snapshot -hda concerto.img # try out in qemu
+* dd if=concerto.img of=/dev/sdX # copy image to flash drive
 
 chroot_tasks.sh is run once a basic system is established, in the context of the new system, and sets up the stuff needed for Concerto.
 
