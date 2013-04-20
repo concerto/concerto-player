@@ -8,7 +8,7 @@ export DEBCONF_NONINTERACTIVE_SEEN=true
 # install packages we need (build-essential is temporary)
 apt-get -y install xserver-xorg xserver-xorg-video-all \
 	chromium unclutter ifplugd xinit blackbox \
-	ruby1.9.1-full build-essential
+	ruby1.9.1-full openssh-server build-essential
 
 # and rubygems we need
 gem install bandshell
