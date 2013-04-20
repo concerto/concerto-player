@@ -8,7 +8,8 @@ export DEBCONF_NONINTERACTIVE_SEEN=true
 # install packages we need (build-essential is temporary)
 apt-get -y install xserver-xorg xserver-xorg-video-all \
 	chromium unclutter ifplugd xinit blackbox \
-	ruby1.9.1-full build-essential
+	ruby1.9.1-full build-essential \
+	vim screen
 
 # and rubygems we need
 gem install bandshell
@@ -19,6 +20,9 @@ apt-get -y autoremove
 
 # install live-boot so we get an initrd built for us
 apt-get -y install live-boot live-boot-initramfs-tools linux-image-amd64
+
+# clean up apt caches
+apt-get -y clean
 
 # set up hostname
 echo concerto-player > /etc/hostname
