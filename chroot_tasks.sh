@@ -43,6 +43,12 @@ EOF
 # modify inittab so we auto-login at boot as concerto
 sed -i -e 's/getty 38400 tty2/getty -a concerto tty2/' /etc/inittab
 
+# create rc.local file to start bandshell
+cat > /etc/rc.local << EOF
+#!/bin/sh -e
+/usr/local/bin/bandshelld start
+EOF
+
 # set passwords for the 'root' and 'concerto' accounts.
 # passwords are stored in passwords.sh
 . ./passwords.sh
