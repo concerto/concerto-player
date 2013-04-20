@@ -1,3 +1,19 @@
+#!/bin/sh
+
+if [ "`whoami`" != "root" ]; then
+	# check if sudo is available, if not error out
+	if command -v sudo >/dev/null 2>&1; then
+		echo This script needs root privileges to run.
+		echo Press enter to attempt to run under sudo.
+		echo Press ctrl-C to quit.
+		read dummyvar
+		exec sudo $0
+	else
+		echo This script needs root privileges to run.
+		exit 1
+	fi
+fi
+
 mkdiskimage -z -M concerto.img 1024M
 LOOP_DEV=`losetup --show -f concerto.img`
 PARTITION_NO="p1"
