@@ -37,7 +37,7 @@ mount $PARTITION $MOUNTPOINT
 mkdir $MOUNTPOINT/live
 mksquashfs $CHROOT_DIR $MOUNTPOINT/live/concerto.squashfs
 
-# copy other needed files into chroot
+# copy other needed files from chroot into boot medium
 
 # There should only be one kernel/initrd.img pair. So we just find it and copy it.
 KERNEL=`ls $CHROOT_DIR/boot | grep vmlinuz | head -1`
@@ -52,9 +52,9 @@ KERNEL $KERNEL
 APPEND boot=live initrd=$INITRD
 EOF
 
-sleep 1
 
 # clean up after ourselves
+sleep 1
 umount $MOUNTPOINT
 rmdir $MOUNTPOINT
 partx -d $LOOP_DEV
