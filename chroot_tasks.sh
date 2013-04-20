@@ -37,7 +37,7 @@ blackbox &
 unclutter &
 
 # run the browser (if it crashes or dies, the X session should end)
-chromium --no-first-run --kiosk http://nightly.concerto-signage.org/frontend/1
+chromium --no-first-run --kiosk http://localhost:4567/
 EOF
 
 # modify inittab so we auto-login at boot as concerto
