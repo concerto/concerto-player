@@ -5,9 +5,17 @@ export LANG="C"
 export DEBIAN_FRONTEND=noninteractive
 export DEBCONF_NONINTERACTIVE_SEEN=true
 
-# install packages we need
+# install packages we need (build-essential is temporary)
 apt-get -y install xserver-xorg xserver-xorg-video-all \
-	chromium unclutter ifplugd xinit blackbox
+	chromium unclutter ifplugd xinit blackbox \
+	ruby1.9.1-full build-essential
+
+# and rubygems we need
+gem install bandshell
+
+# once rubygems have been installed, build-essential isn't needed
+apt-get -y purge build-essential
+apt-get -y autoremove
 
 # install live-boot so we get an initrd built for us
 apt-get -y install live-boot live-boot-initramfs-tools linux-image-amd64
