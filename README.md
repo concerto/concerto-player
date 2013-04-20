@@ -2,12 +2,14 @@
 ===============
 
 ## Basic Build Instructions
-* apt-get install debootstrap squashfs-tools syslinux syslinux-common
+* apt-get install debootstrap squashfs-tools syslinux syslinux-common apt-cacher-ng
 * ...maybe edit chroot_tasks.sh
 * sudo ./make_chroot.sh
 * sudo ./make_bootable_image.sh
 * qemu -m 1024 -snapshot -hda concerto.img # try out in qemu
 * dd if=concerto.img of=/dev/sdX # copy image to flash drive
+
+apt-cacher-ng is recommended for development purposes (to reduce load on the Debian mirrors), and the default mirror URL is set up with this in mind. If you don't want to use apt-cacher-ng (e.g. you're only building this once), you may edit make_chroot.sh and change the MIRROR_URL to your preferred Debian mirror.
 
 chroot_tasks.sh is run once a basic system is established, in the context of the new system, and sets up the stuff needed for Concerto.
 
