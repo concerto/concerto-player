@@ -43,9 +43,8 @@ EOF
 # modify inittab so we auto-login at boot as concerto
 sed -i -e 's/getty 38400 tty2/getty -a concerto tty2/' /etc/inittab
 
-# set up a root password
-ROOT_PASSWORD=phuphek9
+# set passwords for the 'root' and 'concerto' accounts.
+# passwords are stored in passwords.sh
+. ./passwords.sh
 (echo $ROOT_PASSWORD; echo $ROOT_PASSWORD) | passwd root
-
-USER_PASSWORD=blah
 (echo $USER_PASSWORD; echo $USER_PASSWORD) | passwd concerto
