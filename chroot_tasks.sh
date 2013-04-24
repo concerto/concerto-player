@@ -1,3 +1,5 @@
+#!/bin/sh -e
+
 # set up variables so that config prompts are not displayed
 export LC_ALL="C"
 export LANGUAGE="C"
