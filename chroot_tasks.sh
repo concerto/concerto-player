@@ -11,10 +11,22 @@ export DEBCONF_NONINTERACTIVE_SEEN=true
 apt-get -y install xserver-xorg xserver-xorg-video-all \
 	chromium unclutter ifplugd xinit blackbox \
 	ruby1.9.1-full build-essential \
-	vim screen
+	vim screen git-core
 
 # and rubygems we need
-gem install bandshell
+#gem install bandshell
+cat > /tmp/install_bandshell.sh <<EOF
+#!/bin/sh -e
+cd /tmp
+git clone git://github.com/concerto/bandshell.git
+cd bandshell
+gem build bandshell.gemspec
+gem install *.gem
+cd /
+rm -rf /tmp/bandshell
+EOF
+chmod +x /tmp/install_bandshell.sh
+/tmp/install_bandshell.sh
 
 # once rubygems have been installed, build-essential isn't needed
 apt-get -y purge build-essential
