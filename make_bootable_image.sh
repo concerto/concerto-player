@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 if [ "`whoami`" != "root" ]; then
 	# check if sudo is available, if not error out
