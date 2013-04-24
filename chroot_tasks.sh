@@ -67,6 +67,51 @@ cat > /etc/rc.local << EOF
 /usr/local/bin/bandshelld start
 EOF
 
+cat > /etc/init.d/concerto-live << "EOF"
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:		concerto-live
+# Required-Start:	$local_fs
+# Required-Stop:	$local_fs
+# X-Start-Before:	$network
+# Default-Start:	S
+# Default-Stop:		0 6
+# Short-Description:	Live system configuration for Concerto
+# Description:		Live system configuration for Concerto
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+MOUNTPOINT=/lib/live/mount/medium
+MEDIUM_PATH_DIR=/etc/concerto
+MEDIUM_PATH_FILE=medium_path
+
+case "$1" in
+start)
+	log_action_begin_msg "Configuring Concerto Player"
+	# try to remount boot medium as read-write
+	# we don't care if this fails, the bandshell code will figure it out
+	mount -o remount,rw,sync $MOUNTPOINT || true
+
+	# create file indicating where mountpoint is
+	mkdir -p $MEDIUM_PATH_DIR
+	echo -n $MOUNTPOINT > $MEDIUM_PATH_DIR/$MEDIUM_PATH_FILE
+
+	# generate /etc/network/interfaces from our configs
+	/usr/local/bin/concerto_netsetup
+	log_action_end_msg $?
+	;;
+stop)
+	;;
+esac
+EOF
+
+chmod +x /etc/init.d/concerto-live
+update-rc.d concerto-live defaults
+
+# clean up apt package cache
+apt-get clean
+
 # set passwords for the 'root' and 'concerto' accounts.
 # passwords are stored in passwords.sh
 . ./passwords.sh
