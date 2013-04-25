@@ -67,6 +67,7 @@ cat > /etc/rc.local << EOF
 /usr/local/bin/bandshelld start
 EOF
 
+# create init script to preload bandshell network config
 cat > /etc/init.d/concerto-live << "EOF"
 #!/bin/sh
 ### BEGIN INIT INFO
@@ -108,6 +109,60 @@ EOF
 
 chmod +x /etc/init.d/concerto-live
 update-rc.d concerto-live defaults
+
+# create init script to load ssh keys from boot medium
+cat > /etc/init.d/ssh-keys << "EOF"
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:		ssh-keys
+# Required-Start:	$local_fs
+# Required-Stop:	$local_fs
+# X-Start-Before:	sshd
+# Default-Start:	2 3 4 5
+# Default-Stop:		
+# Short-Description:	Load SSH keys from boot medium
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+MOUNTPOINT=`cat /etc/concerto/medium_path`
+
+case "$1" in
+start)
+	log_action_begin_msg "Configuring SSH host keys"
+
+	# make sure any keys that were part of the live image are gone
+	rm -f /etc/ssh/ssh_host_*
+
+	if [ -f $MOUNTPOINT/ssh_keys.tar ]; then
+		# if keys are found stored on the boot medium, load them
+		# IMPORTANT NOTE: unless you are really sure you know what
+		# you are doing, you should NOT put an ssh_keys.tar file on
+		# the boot medium. Instead, let this script generate it on
+		# first boot. This way, a unique set of keys will be generated
+		# for each box.
+		tar -xvf $MOUNTPOINT/ssh_keys.tar -C /etc/ssh
+	else
+		# generate the necessary keys
+		ssh-keygen -A
+
+		# try to save keys to boot medium
+		# ignore errors from this in case medium isn't writable
+		( 
+			cd /etc/ssh; 
+			tar -cvf $MOUNTPOINT/ssh_keys.tar ssh_host_* 
+		) || true
+	fi
+
+	log_action_end_msg $?
+	;;
+
+stop)
+	;;
+esac
+EOF
+chmod +x /etc/init.d/ssh-keys
+insserv ssh-keys
 
 # clean up apt package cache
 apt-get clean
