@@ -1,19 +1,29 @@
 #Concerto Player
-===============
-
-## Basic Build Instructions
-* apt-get install debootstrap squashfs-tools syslinux syslinux-common apt-cacher-ng
+Builds a live image that runs as a kiosk that is integrated with bandshell for displaying concerto content.
+## Building the Image
+On a basic debian install do the following.  If you run in the root terminal then you wont need the `sudo`'s.
+* `sudo apt-get install debootstrap squashfs-tools syslinux syslinux-common apt-cacher-ng git-core`
+* `git clone https://github.com/concerto/concerto-player.git`
+* `cd concerto-player`
 * ...maybe edit chroot_tasks.sh
-* sudo ./make_chroot.sh
-* sudo ./make_bootable_image.sh
-* qemu-system-x86_64 -m 1024 -snapshot -hda concerto.img # try out in qemu
-* dd if=concerto.img of=/dev/sdX # copy image to flash drive
+* ...maybe edit passwords.sh
+* `sudo ./make_chroot.sh 2>&1 | tee make_chroot.log`
+* `sudo ./make_bootable_image.sh 2>&1 | tee make_bootable_image.log`
 
+## Testing the Image
+In qemu:
+* `qemu-system-x86_64 -m 1024 -snapshot -hda concerto.img`
+ 
+## Placing on Flash Drive
+Make sure you substitute *your* flash drive device for the output file _of_ parameter.  `lsusb` might be helpful in finding out what yours is.
+* `sudo dd if=concerto.img of=/dev/sdX`
+ 
+## Background
 apt-cacher-ng is recommended for development purposes (to reduce load on the Debian mirrors), and the default mirror URL is set up with this in mind. If you don't want to use apt-cacher-ng (e.g. you're only building this once), you may edit make_chroot.sh and change the MIRROR_URL to your preferred Debian mirror.
 
 chroot_tasks.sh is run once a basic system is established, in the context of the new system, and sets up the stuff needed for Concerto.
 
-(and as promised, here's all the technical details...)
+### Technical Details...
 
 The way it works is that you run make_chroot.sh as root. This uses debootstrap to set up a base system, then runs chroot_tasks.sh inside that system to set up whatever needs to be set up. The policy-rc.d stuff is needed to prevent the new system's daemons being started up in the build system.
 
