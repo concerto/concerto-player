@@ -54,6 +54,11 @@ blackbox &
 # hide the mouse pointer
 unclutter &
 
+until wget -q http://localhost:4567
+do
+  sleep 2
+done
+
 # run the browser (if it crashes or dies, the X session should end)
 chromium --no-first-run --kiosk http://localhost:4567/screen
 EOF
