@@ -7,6 +7,19 @@ export LANG="C"
 export DEBIAN_FRONTEND=noninteractive
 export DEBCONF_NONINTERACTIVE_SEEN=true
 
+case `dpkg --print-architecture` in
+i386)
+	KERNEL=linux-image-686-pae
+	;;
+amd64)
+	KERNEL=linux-image-amd64
+	;;
+*)
+	echo "we don't support this architecture"
+	exit 1
+	;;
+esac
+
 # install packages we need (build-essential is temporary)
 apt-get -y install xserver-xorg xserver-xorg-video-all \
 	chromium unclutter ifplugd xinit blackbox \
@@ -34,7 +47,7 @@ apt-get -y purge build-essential
 apt-get -y autoremove
 
 # install live-boot so we get an initrd built for us
-apt-get -y install live-boot live-boot-initramfs-tools linux-image-amd64
+apt-get -y install live-boot live-boot-initramfs-tools ${KERNEL}
 
 # clean up apt caches
 apt-get -y clean
