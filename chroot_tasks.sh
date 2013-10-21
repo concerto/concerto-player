@@ -73,6 +73,10 @@ blackbox &
 # hide the mouse pointer
 unclutter &
 
+# disable power-management and screen blanking
+xset -dpms
+xset s off
+
 # run the browser (if it crashes or dies, the X session should end)
 chromium --no-first-run --kiosk $URL
 EOF
