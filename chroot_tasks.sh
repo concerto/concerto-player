@@ -77,6 +77,12 @@ unclutter &
 xset -dpms
 xset s off
 
+# wait until the local http server is available
+until wget -q http://localhost:4567
+do
+  sleep 2
+done
+
 # run the browser (if it crashes or dies, the X session should end)
 chromium --no-first-run --kiosk $URL
 EOF
