@@ -60,8 +60,13 @@ echo concerto-player > /etc/hostname
 useradd -m -s `which xinit` concerto
 
 # create a .xinitrc that will start fullscreen chromium
-cat > /home/concerto/.xinitrc << EOF
+cat > /home/concerto/.xinitrc << "EOF"
 #!/bin/sh
+URL=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.url=(\S+)/'`
+if [ -z $URL ]; then
+	URL=http://localhost:4567/screen
+fi
+
 # start window manager
 blackbox &
 
@@ -69,7 +74,7 @@ blackbox &
 unclutter &
 
 # run the browser (if it crashes or dies, the X session should end)
-chromium --no-first-run --kiosk http://localhost:4567/screen
+chromium --no-first-run --kiosk $URL
 EOF
 
 # modify inittab so we auto-login at boot as concerto
