@@ -11,7 +11,8 @@ export DEBCONF_NONINTERACTIVE_SEEN=true
 apt-get -y install xserver-xorg xserver-xorg-video-all \
 	chromium unclutter ifplugd xinit blackbox \
 	ruby1.9.1-full build-essential \
-	vim screen git-core openssh-server
+	vim screen git-core openssh-server \
+	firmware-linux-nonfree
 
 # and rubygems we need
 #gem install bandshell
