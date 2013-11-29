@@ -43,3 +43,7 @@ Last but not least, passwords are set up for the root and concerto users.
 Once make_chroot.sh is finished, the live filesystem exists in chroot/. Running make_bootable_image.sh (which also must run as root) will create a 1GB hard disk image formatted as FAT16, install the syslinux bootloader, copy the kernel and initrd from the live system to where they need to go, and generate a syslinux.cfg file. It also makes a squashfs image of the chroot directory and puts that in the filesystem under /live, where live-boot's initrd will find it. When all is said and done you can test it with qemu-system-x86_64 -m 1024 -snapshot -hda concerto.img.
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/concerto/concerto-player/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
