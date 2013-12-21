@@ -28,6 +28,7 @@ EOF
 chmod +x $CHROOT_DIR/etc/policy-rc.d
 
 # mount filesystems in the chroot
+mount --bind /dev/pts $CHROOT_DIR/dev/pts
 mount -t proc proc $CHROOT_DIR/proc
 mount -t sysfs sysfs $CHROOT_DIR/sys
 
@@ -37,8 +38,9 @@ chmod +x $CHROOT_DIR/chroot_tasks.sh
 chroot $CHROOT_DIR /chroot_tasks.sh
 
 # unmount pseudo-filesystems
-umount chroot/proc
-umount chroot/sys
+umount $CHROOT_DIR/sys
+umount $CHROOT_DIR/proc
+umount $CHROOT_DIR/dev/pts
 
 # delete temporary files created in chroot
 rm $CHROOT_DIR/etc/policy-rc.d
