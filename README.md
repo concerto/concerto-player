@@ -16,7 +16,7 @@ In qemu:
 
 ##Pre-build images
 There are two pre-built Player images available for download:
-http://dl.concerto-signage.org//concerto_player.img (for flashing to CF/SD cards)
+http://dl.concerto-signage.org//concerto_player.img.zip (for flashing to CF/SD cards)
 http://dl.concerto-signage.org/concerto_player.vmdk (for use in Virtual Machine environments for testing)
 
 ## Placing on Flash Drive
