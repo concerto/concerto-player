@@ -14,6 +14,9 @@ if [ "`whoami`" != "root" ]; then
 	fi
 fi
 
+# free any handles on chroot by dbus-daemon (lsof chroot)
+fuser -k chroot
+
 mkdiskimage -z -M concerto.img 1024M
 LOOP_DEV=`losetup --show -f concerto.img`
 PARTITION_NO="p1"
