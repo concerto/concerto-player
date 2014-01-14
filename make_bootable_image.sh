@@ -14,9 +14,6 @@ if [ "`whoami`" != "root" ]; then
 	fi
 fi
 
-# free any handles on chroot by dbus-daemon (lsof chroot)
-fuser -k chroot
-
 mkdiskimage -z -M concerto.img 1024M
 LOOP_DEV=`losetup --show -f concerto.img`
 PARTITION_NO="p1"
@@ -35,6 +32,9 @@ mkdir $MOUNTPOINT
 
 # mount partition so we can copy files over
 mount $PARTITION $MOUNTPOINT
+
+# free any handles on chroot by dbus-daemon (lsof chroot)
+fuser -k ${CHROOT_DIR}
 
 # create squashfs filesystem
 mkdir $MOUNTPOINT/live
