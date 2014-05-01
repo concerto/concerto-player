@@ -55,7 +55,7 @@ apt-get -y clean
 # set up hostname
 echo concerto-player > /etc/hostname
 
-# create a user account that, when logged in, 
+# create a user account that, when logged in,
 # will start the X server and the player
 useradd -m -s `which xinit` concerto
 
@@ -76,6 +76,13 @@ MAC_DETECT=`cat /proc/cmdline | perl -ne 'print "1\n" if /concerto.mac_detect/'`
 if [ -n $MAC_DETECT ]; then
 	MAC=`/sbin/ifconfig eth0 | perl -ne 'print "$1\n" if /(([0-9a-f]{2}:){5}[0-9a-f]{2})/'`
 	URL=${URL}?mac=$MAC
+fi
+
+# compensate for overscan / underscan using --transform, expects "a,b,c,d,e,f,g,h,i"
+# format, check xrandr man pages for details as it's rather complicated.
+SCALE=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.scale=(\S+)/'`
+if [ -n $SCALE]; then
+	xrandr --transform $SCALE
 fi
 
 # start window manager
@@ -159,7 +166,7 @@ cat > /etc/init.d/ssh-keys << "EOF"
 # Required-Stop:	$local_fs
 # X-Start-Before:	sshd
 # Default-Start:	2 3 4 5
-# Default-Stop:		
+# Default-Stop:
 # Short-Description:	Load SSH keys from boot medium
 ### END INIT INFO
 
@@ -188,9 +195,9 @@ start)
 
 		# try to save keys to boot medium
 		# ignore errors from this in case medium isn't writable
-		( 
-			cd /etc/ssh; 
-			tar -cvf $MOUNTPOINT/ssh_keys.tar ssh_host_* 
+		(
+			cd /etc/ssh;
+			tar -cvf $MOUNTPOINT/ssh_keys.tar ssh_host_*
 		) || true
 	fi
 
