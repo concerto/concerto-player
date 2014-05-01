@@ -80,9 +80,9 @@ fi
 
 # compensate for overscan / underscan using --transform, expects "a,b,c,d,e,f,g,h,i"
 # format, check xrandr man pages for details as it's rather complicated.
-SCALE=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.scale=(\S+)/'`
-if [ -n $SCALE]; then
-	xrandr --transform $SCALE
+TRANSFORM=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.transform=(\S+)/'`
+if [ -n $TRANSFORM]; then
+	xrandr --transform $TRANSFORM
 fi
 
 # start window manager
