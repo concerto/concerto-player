@@ -14,7 +14,7 @@ On a basic debian install do the following.  If you run in the root terminal the
 In qemu:
 * `qemu-system-x86_64 -m 1024 -snapshot -hda concerto.img`
 
-##Pre-build images
+##Pre-built images
 There are two pre-built Player images available for download:
 http://dl.concerto-signage.org//concerto_player.img.zip (for flashing to CF/SD cards)
 http://dl.concerto-signage.org/concerto_player.vmdk (for use in Virtual Machine environments for testing)
