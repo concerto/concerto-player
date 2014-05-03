@@ -78,11 +78,22 @@ if [ -n $MAC_DETECT ]; then
 	URL=${URL}?mac=$MAC
 fi
 
+# set video output name for transform and scale commands
+# ex: HDMI1 or VGA1
+VIDEO_OUT=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.video_out=(\S+)/'`
+
 # compensate for overscan / underscan using --transform, expects "a,b,c,d,e,f,g,h,i"
 # format, check xrandr man pages for details as it's rather complicated.
 TRANSFORM=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.transform=(\S+)/'`
 if [ -n $TRANSFORM]; then
-	xrandr --transform $TRANSFORM
+	xrandr --output $VIDEO_OUT --transform $TRANSFORM
+fi
+
+# add support for the xrandr scale command (ex: concerto.scale=1.05x1.05)
+# Usage: xrandr --scale <x>x<y>
+SCALE=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.scale=(\S+)/'`
+if [ -n $SCALE]; then
+	xrandr --output $VIDEO_OUT --scale $SCALE
 fi
 
 # start window manager
