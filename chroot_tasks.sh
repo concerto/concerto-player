@@ -67,6 +67,11 @@ if [ -z $URL ]; then
 	URL=http://localhost:4567/screen
 fi
 
+# add custom xrandr commands to this file
+if [ -x /lib/live/mount/medium/xrandr.sh ]; then
+        /lib/live/mount/medium/xrandr.sh
+fi
+
 ROTATE=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.rotate=(\S+)/'`
 if [ -n $ROTATE ]; then
 	xrandr -o $ROTATE
@@ -76,24 +81,6 @@ MAC_DETECT=`cat /proc/cmdline | perl -ne 'print "1\n" if /concerto.mac_detect/'`
 if [ -n $MAC_DETECT ]; then
 	MAC=`/sbin/ifconfig eth0 | perl -ne 'print "$1\n" if /(([0-9a-f]{2}:){5}[0-9a-f]{2})/'`
 	URL=${URL}?mac=$MAC
-fi
-
-# set video output name for transform and scale commands
-# ex: HDMI1 or VGA1
-VIDEO_OUT=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.video_out=(\S+)/'`
-
-# compensate for overscan / underscan using --transform, expects "a,b,c,d,e,f,g,h,i"
-# format, check xrandr man pages for details as it's rather complicated.
-TRANSFORM=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.transform=(\S+)/'`
-if [ -n $TRANSFORM]; then
-	xrandr --output $VIDEO_OUT --transform $TRANSFORM
-fi
-
-# add support for the xrandr scale command (ex: concerto.scale=1.05x1.05)
-# Usage: xrandr --scale <x>x<y>
-SCALE=`cat /proc/cmdline | perl -ne 'print "$1\n" if /concerto.scale=(\S+)/'`
-if [ -n $SCALE]; then
-	xrandr --output $VIDEO_OUT --scale $SCALE
 fi
 
 # start window manager
