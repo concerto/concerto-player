@@ -16,7 +16,7 @@ In qemu:
 
 ##Pre-built image
 A pre-built image for testing purposes is available at:
-http://dl.concerto-signage.org/concerto_player-0.6.0.img
+http://dl.concerto-signage.org/concerto_player-0.6.0.img.zip
 
 ## Placing on Flash Drive
 Make sure you substitute *your* flash drive device for the output file _of_ parameter.  `lsusb` might be helpful in finding out what yours is.
