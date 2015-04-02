@@ -1,5 +1,6 @@
 #Concerto Player
-Builds a live image that runs as a kiosk that is integrated with bandshell for displaying concerto content.
+Builds a live image that runs as a kiosk that is integrated with bandshell for displaying concerto content. For production purposes, it should be built on a **64-bit Debian** box (Ubuntu can introduce some subtle differences) and the passwords in password.sh should be changed.
+
 ## Building the Image
 On a basic debian install do the following.  If you run in the root terminal then you wont need the `sudo`'s.
 * `sudo apt-get install debootstrap squashfs-tools syslinux syslinux-common apt-cacher-ng git-core`
@@ -15,8 +16,11 @@ In qemu:
 * `qemu-system-x86_64 -m 1024 -snapshot -hda concerto.img`
 
 ##Pre-built image
-A pre-built image for testing purposes is available at:
-http://dl.concerto-signage.org/concerto_player-0.8.0.img.zip
+A pre-built raw image is available at:
+http://dl.concerto-signage.org/concerto_player-0.9.0.img.zip
+
+A pre-built VM image for testing purposes is available at:
+http://dl.concerto-signage.org/concerto_player-0.9.0.vmdk
 
 ## Placing on Flash Drive
 Make sure you substitute *your* flash drive device for the output file _of_ parameter.  `lsusb` might be helpful in finding out what yours is.
