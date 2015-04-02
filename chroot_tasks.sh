@@ -24,7 +24,7 @@ esac
 apt-get -y install xserver-xorg xserver-xorg-video-all \
 	chromium unclutter ifplugd xinit blackbox \
 	ruby1.9.1-full build-essential \
-	vim screen git-core openssh-server \
+	vim screen git-core ntpdate openssh-server \
 	firmware-linux-nonfree
 
 # and rubygems we need
