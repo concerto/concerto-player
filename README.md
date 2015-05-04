@@ -3,7 +3,7 @@ Builds a live image that runs as a kiosk that is integrated with bandshell for d
 
 ## Building the Image
 On a basic debian install do the following.  If you run in the root terminal then you wont need the `sudo`'s.
-* `sudo apt-get install debootstrap squashfs-tools syslinux syslinux-common apt-cacher-ng git-core`
+* `sudo apt-get install debootstrap squashfs-tools syslinux syslinux-common syslinux-utils apt-cacher-ng git-core`
 * `git clone https://github.com/concerto/concerto-player.git`
 * `cd concerto-player`
 * ...maybe edit chroot_tasks.sh
