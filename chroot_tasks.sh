@@ -213,7 +213,6 @@ insserv ssh-keys
 apt-get clean
 
 # set passwords for the 'root' and 'concerto' accounts.
-# passwords are stored in passwords.sh
-. ./passwords.sh
-(echo $ROOT_PASSWORD; echo $ROOT_PASSWORD) | passwd root
-(echo $USER_PASSWORD; echo $USER_PASSWORD) | passwd concerto
+# passwords are stored in passwords.txt
+chpasswd < passwords.txt
+

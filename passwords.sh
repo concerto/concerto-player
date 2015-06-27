@@ -1,2 +1,0 @@
-ROOT_PASSWORD=blah
-USER_PASSWORD=blah
