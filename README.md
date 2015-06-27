@@ -1,5 +1,5 @@
 #Concerto Player
-Builds a live image that runs as a kiosk that is integrated with bandshell for displaying concerto content. For production purposes, it should be built on a **64-bit Debian** box (Ubuntu can introduce some subtle differences) and the passwords in password.sh should be changed.
+Builds a live image that runs as a kiosk that is integrated with bandshell for displaying concerto content. For production purposes, it should be built on a **64-bit Debian** box (Ubuntu can introduce some subtle differences) and the passwords in passwords.txt should be changed.
 
 ## Building the Image
 On a basic debian install do the following.  If you run in the root terminal then you wont need the `sudo`'s.
