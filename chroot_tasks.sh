@@ -145,7 +145,7 @@ start)
 	echo -n $MOUNTPOINT > $MEDIUM_PATH_DIR/$MEDIUM_PATH_FILE
 
 	# generate /etc/network/interfaces from our configs
-	/usr/local/bin/concerto_netsetup
+	/usr/local/bin/bandshelld_boot
 	log_action_end_msg $?
 	;;
 stop)
