@@ -144,7 +144,14 @@ start)
 	echo -n $MOUNTPOINT > $MEDIUM_PATH_DIR/$MEDIUM_PATH_FILE
 
 	# generate /etc/network/interfaces from our configs
-	/usr/local/bin/concerto_netsetup
+	if [ -x /usr/local/bin/concerto_netsetup ]; then
+		/usr/local/bin/concerto_netsetup
+	elif [ -x /usr/local/bin/bandshelld_boot ]; then
+		/usr/local/bin/bandshelld_boot
+	else
+		echo "neither concerto_netsetup nor bandshelld_boot found!"
+		echo "something is wrong with your build process"
+	fi
 	log_action_end_msg $?
 	;;
 stop)
