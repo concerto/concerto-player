@@ -1,6 +1,8 @@
 Building Concerto Player for UEFI Platforms
 AA - 2015-10-21
 
+Make sure syslinux-efi package or equivalent is installed.
+
 Make sure to build a 64-bit player: build on a 64-bit system, and remove
 --arch=i386 from make_chroot.sh.
 
