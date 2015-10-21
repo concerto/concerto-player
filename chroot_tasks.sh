@@ -46,8 +46,17 @@ chmod +x /tmp/install_bandshell.sh
 apt-get -y purge build-essential
 apt-get -y autoremove
 
+# let's get our kernel from backports... wheezy's 3.2.0 kernels don't
+# seem to support (U)EFI booting very well.
+cat >> /etc/apt/sources.list << 'EOF'
+deb http://http.debian.net/debian wheezy-backports main
+EOF
+
+apt-get update
+apt-get -y -t wheezy-backports install ${KERNEL}
+
 # install live-boot so we get an initrd built for us
-apt-get -y install live-boot live-boot-initramfs-tools ${KERNEL}
+apt-get -y install live-boot live-boot-initramfs-tools 
 
 # clean up apt caches
 apt-get -y clean
