@@ -33,9 +33,6 @@ mkdir $MOUNTPOINT
 # mount partition so we can copy files over
 mount $PARTITION $MOUNTPOINT
 
-# free any handles on chroot by dbus-daemon (lsof chroot)
-fuser -k ${CHROOT_DIR}
-
 # create squashfs filesystem
 mkdir $MOUNTPOINT/live
 mksquashfs $CHROOT_DIR $MOUNTPOINT/live/concerto.squashfs

@@ -46,3 +46,6 @@ umount $CHROOT_DIR/dev/pts
 rm $CHROOT_DIR/etc/policy-rc.d
 rm $CHROOT_DIR/chroot_tasks.sh
 rm $CHROOT_DIR/passwords.txt
+
+# free any handles on chroot by dbus-daemon (lsof chroot)
+fuser -k ${CHROOT_DIR}
