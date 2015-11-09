@@ -17,10 +17,10 @@ In qemu:
 
 ##Pre-built image
 A pre-built raw image is available at:
-http://dl.concerto-signage.org/concerto_player-0.9.0.img.zip
+http://dl.concerto-signage.org/concerto_player.img.zip
 
 A pre-built VM image for testing purposes is available at:
-http://dl.concerto-signage.org/concerto_player-0.9.0.vmdk
+http://dl.concerto-signage.org/concerto_player.vmdk
 
 ## Placing on Flash Drive
 Make sure you substitute *your* flash drive device for the output file _of_ parameter.  `lsusb` might be helpful in finding out what yours is.
