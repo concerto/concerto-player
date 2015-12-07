@@ -109,7 +109,7 @@ do
 done
 
 # run the browser (if it crashes or dies, the X session should end)
-chromium --no-first-run --kiosk $URL
+chromium --disable-translate --disable-infobars --no-first-run --kiosk $URL
 EOF
 
 # modify inittab so we auto-login at boot as concerto
