@@ -103,10 +103,7 @@ INITRD ../../$INITRD
 APPEND boot=live 
 EOF
 
-# generate a xrandr.sh file for custom xrandr commands
-cat > $MOUNTPOINT/xrandr.sh << EOF
-#!/bin/bash
-EOF
+source localconfig.sh
 
 # clean up after ourselves
 sleep 1

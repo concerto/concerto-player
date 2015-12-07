@@ -52,10 +52,8 @@ KERNEL $KERNEL
 APPEND boot=live initrd=$INITRD
 EOF
 
-# generate a xrandr.sh file for custom xrandr commands
-cat > $MOUNTPOINT/xrandr.sh << EOF
-#!/bin/bash
-EOF
+# pull in any local tweaks
+source localconfig.sh
 
 # clean up after ourselves
 sleep 1
