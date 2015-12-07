@@ -68,9 +68,10 @@ mount $PARTITION $MOUNTPOINT
 mount $EFI_PARTITION $EFI_MOUNTPOINT
 
 # install EFI bootloader
-mkdir -p $EFI_MOUNTPOINT/EFI/syslinux
-cp /usr/lib/SYSLINUX.EFI/efi64/* $EFI_MOUNTPOINT/EFI/syslinux
-cp /usr/lib/syslinux/modules/efi64/* $EFI_MOUNTPOINT/EFI/syslinux
+mkdir -p $EFI_MOUNTPOINT/EFI/BOOT
+cp /usr/lib/SYSLINUX.EFI/efi64/* $EFI_MOUNTPOINT/EFI/BOOT
+cp /usr/lib/syslinux/modules/efi64/* $EFI_MOUNTPOINT/EFI/BOOT
+cp $EFI_MOUNTPOINT/EFI/BOOT/syslinux.efi $EFI_MOUNTPOINT/EFI/BOOT/BOOTx64.EFI
 
 # create squashfs filesystem
 mkdir $MOUNTPOINT/live
@@ -94,7 +95,7 @@ EOF
 
 # Now we do the same thing on the EFI side.
 cp $CHROOT_DIR/boot/$KERNEL $CHROOT_DIR/boot/$INITRD $EFI_MOUNTPOINT
-cat > $EFI_MOUNTPOINT/EFI/syslinux/syslinux.cfg <<EOF
+cat > $EFI_MOUNTPOINT/EFI/BOOT/syslinux.cfg <<EOF
 DEFAULT concerto
 LABEL concerto
 KERNEL ../../$KERNEL

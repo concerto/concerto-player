@@ -1,5 +1,5 @@
 Building Concerto Player for UEFI Platforms
-AA - 2015-10-21
+AA - 2015-10-21, 2015-12-06
 
 Make sure syslinux-efi package or equivalent is installed.
 
@@ -8,12 +8,3 @@ Make sure to build a 64-bit player: build on a 64-bit system, and remove
 
 Use make_uefi_image.sh to create a UEFI-capable image.
 
-The image is not yet directly bootable. You need to get to an EFI shell to
-try it out. Turn this on in your BIOS, then use the BIOS boot menu to access
-the EFI shell. Once you're there, enter the following commands:
-
-fs1:		(change to the correct filesystem - it may be fs0:, fs2:, etc)
-cd EFI\syslinux
-syslinux.efi
-
-This should boot the player.
