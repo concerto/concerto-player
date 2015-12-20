@@ -18,7 +18,7 @@ CHROOT_DIR=chroot
 MIRROR_URL=http://localhost:3142/ftp.us.debian.org/debian/
 
 # create basic chroot
-debootstrap --components=main,non-free --arch=i386 wheezy $CHROOT_DIR $MIRROR_URL
+debootstrap --components=main,non-free --arch=i386 jessie $CHROOT_DIR $MIRROR_URL
 
 # set up policy-rc.d so no daemons start in chroot
 cat > $CHROOT_DIR/etc/policy-rc.d <<EOF

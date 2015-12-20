@@ -23,7 +23,7 @@ esac
 # install packages we need (build-essential is temporary)
 apt-get -y install xserver-xorg xserver-xorg-video-all \
 	chromium unclutter ifplugd xinit blackbox \
-	ruby1.9.1-full build-essential \
+	ruby ruby-dev build-essential \
 	vim screen git-core ntpdate openssh-server \
 	firmware-linux-nonfree
 
@@ -48,15 +48,14 @@ apt-get -y autoremove
 
 # let's get our kernel from backports... wheezy's 3.2.0 kernels don't
 # seem to support (U)EFI booting very well.
-cat >> /etc/apt/sources.list << 'EOF'
-deb http://http.debian.net/debian wheezy-backports main
-EOF
+#cat >> /etc/apt/sources.list << 'EOF'
+#deb http://http.debian.net/debian wheezy-backports main
+#EOF
 
-apt-get update
-apt-get -y -t wheezy-backports install ${KERNEL}
-
+#apt-get update
+#apt-get -y -t wheezy-backports install ${KERNEL}
 # install live-boot so we get an initrd built for us
-apt-get -y install live-boot live-boot-initramfs-tools 
+apt-get -y install live-boot live-boot-initramfs-tools ${KERNEL}
 
 # clean up apt caches
 apt-get -y clean
@@ -113,7 +112,8 @@ chromium --disable-translate --disable-infobars --no-first-run --kiosk $URL
 EOF
 
 # modify inittab so we auto-login at boot as concerto
-sed -i -e 's/getty 38400 tty2/getty -a concerto tty2/' /etc/inittab
+#This isn't going to work with systemd -- will need to do an override in /etc/systemd/system/getty...
+#sed -i -e 's/getty 38400 tty2/getty -a concerto tty2/' /etc/inittab
 
 # create rc.local file to start bandshell
 cat > /etc/rc.local << EOF
