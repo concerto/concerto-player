@@ -53,7 +53,7 @@ APPEND boot=live initrd=$INITRD
 EOF
 
 # pull in any local tweaks
-source localconfig.sh
+source ./localconfig.sh
 
 # clean up after ourselves
 sleep 1
